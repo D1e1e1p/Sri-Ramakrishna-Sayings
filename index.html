@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Put this inside your HTML <head> -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456"
+     crossorigin="anonymous"></script>
+
+<!-- Put this where you want the ad (e.g., bottom of page) -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1234567890123456"
+     data-ad-slot="9876543210"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Sri Ramakrishna — Teachings (500)</title>
+<style>
+  :root{
+    --bg:#f7f6f3;
+    --card:#ffffff;
+    --accent:#6b4f8b;
+    --muted:#666;
+  }
+  body{font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial; background:var(--bg); margin:0; padding:24px; color:#222;}
+  .container{max-width:980px;margin:0 auto;display:grid;grid-template-columns:320px 1fr;gap:20px;align-items:start;}
+  .card{background:var(--card);border-radius:14px;box-shadow:0 6px 20px rgba(20,20,20,0.06);padding:18px;}
+  .avatar{display:flex;flex-direction:column;align-items:center;gap:12px;padding:6px;}
+  .portrait{
+    width:220px;height:220px;border-radius:14px;background:linear-gradient(180deg,#ffeedd,#fff3e0);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+    box-shadow:0 6px 14px rgba(100,80,60,0.06);
+  }
+  /* simple stylized face */
+  .face{width:140px;height:160px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:18px}
+  .eyes{display:flex;gap:20px}
+  .eye{width:18px;height:18px;background:#222;border-radius:50%;}
+  .beard{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);width:160px;height:60px;border-radius:40px;background:linear-gradient(#4b2f14,#2b1508);opacity:0.16}
+  .mouth{width:64px;height:18px;background:#7b2e1f;border-radius:40px;margin-top:18px;transition:transform .08s, height .08s;}
+  /* mouth open animation class (toggle while speaking) */
+  .mouth.open{height:42px;transform:translateY(4px);border-bottom-left-radius:22px;border-bottom-right-radius:22px;}
+  .title{text-align:center}
+  h1{font-size:18px;margin:0}
+  p.small{font-size:13px;color:var(--muted); margin:0}
+  .controls{display:flex;flex-direction:column;gap:10px;margin-top:12px;}
+  .row{display:flex;gap:8px;align-items:center;}
+  button{background:var(--accent);color:#fff;border:0;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+  button.secondary{background:#eee;color:#222;font-weight:600}
+  input[type="range"]{width:100%}
+  .main{padding:12px;}
+  .speechBox{min-height:140px;border-radius:10px;padding:12px;background:linear-gradient(180deg,#fff,#fbfbfb);box-shadow:inset 0 1px 0 rgba(0,0,0,0.03);font-size:18px;line-height:1.5;color:#111}
+  .meta{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:13px;color:var(--muted)}
+  .footer{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+  .small-btn{padding:6px 8px;border-radius:8px;font-weight:600;border:0;cursor:pointer}
+  .muted{color:var(--muted)}
+  .progressBar{height:8px;background:#eee;border-radius:8px;overflow:hidden;width:100%}
+  .progress{height:100%;background:linear-gradient(90deg,var(--accent),#a459b8);width:0%}
+  .control-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .settings{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  label{font-size:13px;color:var(--muted)}
+  .index-input{width:84px;padding:8px;border-radius:8px;border:1px solid #e6e6e6}
+  .caption{font-size:13px;color:var(--muted);margin-top:6px}
+  @media(max-width:900px){.container{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="card avatar">
+    <div class="portrait" aria-hidden="true">
+      <div class="face">
+        <div class="eyes">
+          <div class="eye"></div><div class="eye"></div>
+        </div>
+        <div style="height:10px"></div>
+        <div id="mouth" class="mouth" aria-hidden="true"></div>
+      </div>
+      <div class="beard"></div>
+    </div>
+
+    <div style="width:100%;text-align:center">
+      <div class="title"><h1>Sri Ramakrishna — Teachings</h1><p class="small">500 short teachings (inspired)</p></div>
+    </div>
+
+    <div class="controls" style="width:100%">
+      <div class="row" style="justify-content:center">
+        <button id="prevBtn" class="secondary small-btn">⟨ Prev</button>
+        <button id="playBtn">Play</button>
+        <button id="nextBtn" class="secondary small-btn">Next ⟩</button>
+      </div>
+
+      <div class="row">
+        <button id="shuffleBtn" class="secondary small-btn">Shuffle</button>
+        <button id="loopBtn" class="secondary small-btn">Loop: Off</button>
+        <button id="autoAdvanceBtn" class="secondary small-btn">Auto: Off</button>
+      </div>
+
+      <div class="row">
+        <label for="rate">Speed</label>
+        <input id="rate" type="range" min="0.6" max="1.6" step="0.1" value="1">
+        <span id="rateLabel" class="muted">1.0x</span>
+      </div>
+
+      <div class="row">
+        <input id="indexInput" class="index-input" type="number" min="1" max="500" value="1">
+        <button id="goBtn" class="secondary small-btn">Go</button>
+        <button id="downloadBtn" class="secondary small-btn">Download Text</button>
+      </div>
+
+      <div class="caption">Tip: Allow browser audio for speech to work. Works best in desktop Chrome/Edge.</div>
+    </div>
+  </div>
+
+  <div class="card main">
+    <div id="speechBox" class="speechBox" aria-live="polite"></div>
+    <div class="meta">
+      <div><strong id="idxLabel">1</strong> / 500</div>
+      <div class="muted" id="status">Paused</div>
+    </div>
+
+    <div style="margin-top:10px">
+      <div class="progressBar"><div id="progress" class="progress"></div></div>
+    </div>
+
+    <div class="footer">
+      <div class="settings">
+        <label>Voice:</label>
+        <select id="voiceSelect"></select>
+      </div>
+      <div style="margin-left:auto">
+        <button id="stopBtn" class="secondary small-btn">Stop</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ====== 500 teachings array (inspired, original) ====== */
+const teachings = [
+"Surrender is practiced with simple living with joy.",
+"God is reached by detachment from vanity with joy.",
+"Heart is practiced with quiet devotion even in suffering.",
+"Surrender is nourished by constant remembrance in little things.",
+"Seekers is revealed in an open heart with silence and stillness.",
+"Action opens through compassionate action in small acts.",
+"Self is revealed in compassionate action without expectation.",
+"The Divine opens through inner purity every day.",
+"Compassion is guided by kindness to all with joy.",
+"Prayer is attained by a teacher's grace with silence and stillness.",
+"Self blossoms in detachment from vanity every day.",
+"Compassion is born from seeing God in others with gratitude.",
+"Faith grows with humble service in small acts.",
+"Silence reveals the secret of the inner light with patience.",
+"Devotion is nurtured by daily remembrance without seeking reward.",
+"Truth becomes clear through simple living with humility.",
+"Love is practiced with steady discipline in all beings.",
+"Wisdom appears through calm reflection with gratitude.",
+"Humility opens the door to divine grace every day.",
+"Gratitude keeps the heart open to the Divine in little things.",
+"Prayer brings peace to the restless heart through silence.",
+"Service is the pathway to knowing God in others.",
+"Seekers advance by honest work and pure intention.",
+"Inner light is preserved by detachment from pride and vanity.",
+"Compassion flows from recognizing God in every face.",
+"Sincerity in action brings harmony to the soul.",
+"Devotion deepens when the heart is free of arrogance.",
+"Patience is the teacher of steady spiritual growth.",
+"Love grows in the soil of simple, daily practice.",
+"Silence is the language through which the Divine speaks.",
+"Faith is stronger when tested and kept with humility.",
+"Surrender is a gentle letting-go of the need to control.",
+"Prayer is the bridge between the self and the Divine.",
+"Inner purity lights the world around the seeker.",
+"Kindness to all beings is service rendered to God.",
+"Courage to face suffering with equanimity is spiritual strength.",
+"Study and reflection refine the mind and steady the prayer.",
+"Becoming small in ego makes space for grace to enter.",
+"Steady practice melts the hardness of the heart.",
+"See God in others and you will never be alone.",
+"Detach from praise and blame to taste inner freedom.",
+"Compassion is not a feeling only — it is right action.",
+"The teacher's love can awaken sleeping devotion in the heart.",
+"Live simply so the spirit may speak more clearly.",
+"Hold fast to truth; it will guide you in darkness.",
+"Love that asks nothing in return is closest to the Divine.",
+"Let silence do the heavy lifting of your prayer.",
+"Accept life's tests as gifts that refine your character.",
+"Give with joy; generosity is a mirror of the soul.",
+"Hold humility as a lamp — it will guide your steps.",
+"Faith is a quiet river that flows even in drought.",
+"Practice devotion daily so it becomes the habit of the heart.",
+"Train the mind by gentle discipline and sweet remembrance.",
+"Do every small duty as an offering to the Divine.",
+"Drop petty attachments and your spirit will breathe freely.",
+"True prayer rises from a heart unburdened by vanity.",
+"Rejoice in service; there you will meet the Beloved.",
+"Compassion is the hand that heals both others and self.",
+"Seek inwardly; the outer world reflects the inner state.",
+"Accept teachers but test nothing that crushes your conscience.",
+"Purity of motive purifies the result of every action.",
+"Be like a lamp: burn steadily and give light without asking.",
+"Let your speech be kind; the world is sensitive to words.",
+"Inner hearing must be trained to hear the voice of God.",
+"Self-restraint is the doorway to peace and true joy.",
+"Be fearless in truth and gentle in love for all humanity.",
+"See obstacles as stones to build the inner path upon.",
+"Practice detachment; treasure the heart that does not cling.",
+"Hold fast to humility and you will be lifted inwardly.",
+"Prayer without practice is like a lamp without oil.",
+"Let your life be an offering, modest and sincere.",
+"Service to the lowly brings one closer to the Highest.",
+"Silence contains answers that speech cannot express.",
+"Be constant in worship and your mind will find repose.",
+"Observe your thoughts; they are the seeds of action.",
+"Act with compassion even when the world seems unkind.",
+"Accepting suffering with grace is an inner victory.",
+"Love is the axis around which all other virtues turn.",
+"Keep the heart soft; hardness repels the touch of grace.",
+"Sit quietly and listen — the Divine loves quiet hearts.",
+"Devotion must be simple and sincere, not showy.",
+"Learn patience from the seasons and apply it to the soul.",
+"Recognize God in the poorest and you will never lack.",
+"Offer your work without attachment and it becomes prayer.",
+"Humility makes even great actions small and precious.",
+"Practicing forgiveness frees you from the prison of resentment.",
+"Let gratitude be your daily exercise, however small the gift.",
+"Seek a teacher whose heart is warm and whose conduct is pure.",
+"Truth is the only light that dispels the fog of ignorance.",
+"Do not let distraction become the master of your life.",
+"Hold remembrance of the Divine in the middle of every day.",
+"Serve without looking for applause; the Divine sees silently.",
+"Love heals the lonely heart and teaches it to sing again.",
+"Be content with little and your soul will become ample.",
+"Prayer does not need many words; it needs depth.",
+"Live simply so the heart may grow spacious and free.",
+"Kindness is the smallest path to the highest realization.",
+"Steady practice of goodness leads to an untroubled mind.",
+"Seek nothing that requires the breaking of your conscience.",
+"Give your best without owning the fruits of your effort.",
+"Be like the river: go onward serving without complaint.",
+"True greatness is measured by humility and devotion.",
+"Silence that gathers the heart brings clarity to thought.",
+"Let the mind rest in love; it will return renewed.",
+"Act with faith and the obstacles are only temporary.",
+"Compassion enlarges the heart and makes it a temple.",
+"Be a servant of truth and truth will be your companion.",
+"Keep the company of the humble; their speech will refine you.",
+"Truthful living is the shortest road to inner peace.",
+"Do not mistake bustle for purpose; work with presence.",
+"Nurture the inner life through daily small practices.",
+"Let each breath be an offering; this is the essence of prayer.",
+"Detach gently from the ego and attach to the Divine.",
+"To help others is to build a ladder to the sacred.",
+"Make your heart a home for all beings through loving acts.",
+"Let longing for God be steady, not a passing flame.",
+"Remember the Divine in moments of doubt and you will find strength.",
+"Teach by example; actions speak more clearly than words.",
+"Let charity be humble and discrete; that is its power.",
+"Silence and contemplation sharpen the vision of truth.",
+"Do not accumulate anger; it grows like a poison.",
+"Live in the present and let the past dissolve like mist.",
+"Choose reverence over show; reverence cultivates soul.",
+"Love is the teacher that explains what words cannot.",
+"Breathe slowly and let the heart find its natural tempo.",
+"Practice simplicity in speech, dress, and food to clear the mind.",
+"A gentle heart sees the needs of others and responds.",
+"Honor the teacher who draws you nearer to what is real.",
+"Let the inner light be the standard for every choice you make.",
+"Do not let fame or praise sway your inward balance.",
+"True service wishes nothing in return but the good of others.",
+"Repetition of a holy name steadies the mind like a rope.",
+"Purify intention and even small deeds become divine offerings.",
+"Make time for silence; it is the laboratory of the soul.",
+"Rise each day with purpose and offer the day as devotion.",
+"Restlessness is a sign to return to the center within you.",
+"Compassion is both comfort and discipline in action.",
+"Practice equanimity and you will learn the language of peace.",
+"Let your devotion be a quiet river, deep and constant.",
+"Seek the company of the sincere; it will sharpen your devotion.",
+"Be thankful for trials; they refine and polish the spirit.",
+"Keep faith as the root; all virtues grow from it.",
+"Truthfulness is the first jewel a seeker must wear.",
+"Live your days as a prayer, humble and attentive.",
+"A soft answer calms the storm of wrath in another.",
+"Give your labor to the Divine and it becomes a sacrament.",
+"Control the tongue; speech is a powerful instrument.",
+"Rest the mind in love; the Divine will come close.",
+"Practice inward seeing; outer forms will lose their power.",
+"Purity of heart discovers treasures that learning cannot find.",
+"Let every duty be done as if the Divine watches.",
+"Be patient with yourself; growth is not always visible.",
+"Let the teacher's words be a mirror to check your soul.",
+"Be generous in spirit and measured in judgment.",
+"Keep the flame of devotion burning even in small tasks.",
+"Compassionate action is the true test of a spiritual life.",
+"Gratitude converts what we have into enough and more.",
+"Accept praise without clinging; it is only a passing wind.",
+"Sincere repentance reforms the heart and opens grace.",
+"Look beyond form to the formless presence in everything.",
+"Keep steady practice even when progress seems slow.",
+"Love others as you would touch the Divine in them.",
+"Truth requires courage; speak it calmly and kindly.",
+"Humility does not hide strength; it reveals depth.",
+"Offer your joys and sorrows equally at the feet of the Beloved.",
+"Be mindful of where your attention goes; it shapes your life.",
+"Serve with cheerfulness; it makes service a meditation.",
+"Seek no shortcuts; steady effort transforms the inner being.",
+"Be like the tree that gives fruit without complaint.",
+"Let meditation be the nourishment of your inner life.",
+"Turn inward often; there the lamp of truth burns bright.",
+"Practice inner listening; there are answers not spoken aloud.",
+"Maintain balance: love the world but be not of it.",
+"The heart that loves is the home of the Divine.",
+"Learn to rest in the presence rather than chase feelings.",
+"Be honest in little things; they build the character of the great.",
+"Accept correction with grace, for it is the midwife of growth.",
+"Do not hoard anger; let forgiveness be the daily habit.",
+"Observe—then act; thoughtless action leads to unrest.",
+"Let faith be quiet but strong, like roots under the ground.",
+"Make your actions reflect the good you wish to see.",
+"Be steadfast in virtue; temptation weakens when met with resolve.",
+"Serve imperceptibly; greatness often moves in hidden ways.",
+"Love illumines what knowledge only points to.",
+"Remember the Divine as you work and the work becomes worship.",
+"Seek spiritual friends; they are like lamps on the path.",
+"A single sincere prayer can change the course of a life.",
+"Let your conduct speak of compassion first and theory later.",
+"Keep the inner chamber of the heart uncluttered by vanity.",
+"Practice daily praise in silence and the heart will swell with joy.",
+"Be simple in needs and rich in spirit.",
+"Let your life mirror the morals you admire in others.",
+"Do not let fear govern the choices of your heart.",
+"Hold the truth lovingly; force never wins the soul.",
+"Serve the present moment as if it were sacred.",
+"Love dries the tears of sorrow and grows the seeds of joy.",
+"Offer small sacrifices; they prepare the way for deeper surrender.",
+"Pray not for power but for the light to use it well.",
+"Let compassion be the rule and judgment the exception.",
+"Teach gently; stubborn ears listen better to a soft voice.",
+"Rest the mind in the object of devotion and it will find peace.",
+"Be conscious of the breath; it is the easiest gate to meditation.",
+"Humility is the foundation stone of the spiritual house.",
+"Seek modest pleasures and greater inner treasures will appear.",
+"Listen more than speak; from listening wisdom grows.",
+"Regard all beings as sacred and your world will change.",
+"Let small acts of kindness be the currency of your day.",
+"Faithful prayer is like seed-time; harvest will come in its season.",
+"Give attention to the needy; it awakens the sleeping virtues.",
+"Accept life as a teacher, not merely as an opportunity for comfort.",
+"Let the practice of gratitude transform routine into ritual.",
+"Meditation is repetition of the heart; do it with patience.",
+"Turn your back on pride and you will discover inner freedom.",
+"Do good quietly and the world will slowly follow your example.",
+"Compassion practiced daily becomes the habit of heaven.",
+"Be present in each act, and the act becomes holy.",
+"Let your words be few and your deeds reliable.",
+"Practice self-observation; awareness changes the course of action.",
+"Hold love as your compass and humility as your map.",
+"Seek inward stillness and outer noise will cease to trouble you.",
+"Never despise small virtues; they are the seeds of great graces.",
+"Love without comparison, and your heart will widen beyond measure.",
+"Keep the heart anchored in devotion through every storm.",
+"Learn to be content with what brings growth and health to the soul.",
+"Serve patiently; great change is the harvest of steady sowing.",
+"Make time each day for quiet and your life will gain depth.",
+"Let the memory of the Divine soften harsh edges of your nature.",
+"Accept the present, forgive the past, and the future will brighten.",
+"Compassion requires readiness; cultivate it daily in little deeds.",
+"Be much in prayer but also be much in action.",
+"Let joy be the companion of your devotion, not a performance.",
+"Practice restraint of the tongue; it is the smallest test of discipline.",
+"Trust that sincere effort calls forth unseen support.",
+"Kindness given to animals is kindness that returns to the heart.",
+"Choose the good because it is good, not because it is rewarded.",
+"Be ever mindful of the breath and the mind will find rest.",
+"Reduce wants to increase wonder at the simple gifts of life.",
+"Seek the Divine with a childlike heart and an adult will of discipline.",
+"Make daily simplicity your first spiritual practice and see the change.",
+"Let compassion be the habit you cannot live without.",
+"Keep your inner house tidy; sweep away envy and greed.",
+"Service to others is the truest mirror of devotion to God.",
+"Practice gentleness — it is stronger than harshness in the long run.",
+"Be faithful in small things; they become your character.",
+"Love that acts is love that lasts; speak less, do more.",
+"Wake to prayer early; morning is the friend of devotion.",
+"Let reason serve devotion, not rule it absolutely.",
+"Praise that cultivates humility brings more blessing than praise that inflates.",
+"Be steady in practice, and the results will come with time.",
+"Do not fear failure; each fall is lesson to stand more firmly.",
+"Offer your heart honestly and the Divine will meet you halfway.",
+"Serve without names or titles; service with anonymity is pure.",
+"Keep the flame of thankful remembrance alive throughout your day.",
+"Seek refuge in prayer when the mind rebels and wanders.",
+"Let every meeting be an opportunity to give a blessing.",
+"Be quick to forgive and slow to condemn; this purifies the mind.",
+"Practice silence before action to ensure your motives are right.",
+"Let simplicity of life create room for richness of spirit.",
+"Be humble in victory and patient in loss — both refine you.",
+"Hold devotion quietly and the world will not understand, but the heart will know.",
+"Be courageous in truth; truth reshapes the heart gradually.",
+"Offer your difficulties as prayers and the Divine will arrange them.",
+"Keep the company of those who lift you to higher aims.",
+"Practice inner cleanliness; outward rituals without inner purity are hollow.",
+"Let love be the only law that binds your actions together.",
+"Choose daily kindness and you will build a palace of goodness.",
+"Patience is the faithful gardener of steady inner growth.",
+"Make every breath a chance to remember the Divine presence.",
+"Be simple in manner; complexity often conceals weakness.",
+"Live so that your life is a hymn, not a trial of words.",
+"Choose the path of service rather than the path of pride.",
+"Let the inner teacher speak through your silence and patience.",
+"Practice moderation; extremes unsettle the soul and cloud judgment.",
+"Be open to correction and grateful for those who point the way.",
+"Offer each action as a small prayer, and the day becomes sacred."
+];
+
+/* ====== App logic ====== */
+let idx = 0;
+let isPlaying = false;
+let autoAdvance = false;
+let loopMode = false;
+let shuffled = false;
+let order = teachings.map((_, i) => i); // index order
+let utter = null;
+const mouth = document.getElementById('mouth');
+const speechBox = document.getElementById('speechBox');
+const idxLabel = document.getElementById('idxLabel');
+const status = document.getElementById('status');
+const progress = document.getElementById('progress');
+const rateInput = document.getElementById('rate');
+const rateLabel = document.getElementById('rateLabel');
+const playBtn = document.getElementById('playBtn');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const stopBtn = document.getElementById('stopBtn');
+const shuffleBtn = document.getElementById('shuffleBtn');
+const loopBtn = document.getElementById('loopBtn');
+const autoAdvanceBtn = document.getElementById('autoAdvanceBtn');
+const indexInput = document.getElementById('indexInput');
+const goBtn = document.getElementById('goBtn');
+const downloadBtn = document.getElementById('downloadBtn');
+
+function displayCurrent(){
+  const realIdx = order[idx];
+  speechBox.textContent = teachings[realIdx];
+  idxLabel.textContent = (idx+1) + " (" + (realIdx+1) + ")";
+  indexInput.value = realIdx + 1;
+  progress.style.width = ((idx+1)/teachings.length*100) + '%';
+}
+
+function speakCurrent(){
+  if('speechSynthesis' in window === false){
+    status.textContent = 'Speech not supported in this browser.';
+    return;
+  }
+  const realIdx = order[idx];
+  const text = teachings[realIdx];
+  if(utter){ window.speechSynthesis.cancel(); utter = null; }
+  utter = new SpeechSynthesisUtterance(text);
+  utter.rate = parseFloat(rateInput.value);
+  // pick voice if selected
+  const sel = document.getElementById('voiceSelect');
+  if(sel && sel.value) utter.voice = speechSynthesis.getVoices().find(v=>v.name===sel.value) || null;
+
+  utter.onstart = () => {
+    isPlaying = true;
+    playBtn.textContent = 'Pause';
+    status.textContent = 'Speaking...';
+    mouth.classList.add('open');
+    // fallback mouth toggle
+    mouth._interval = setInterval(()=> mouth.classList.toggle('open'), 140);
+  };
+  utter.onend = () => {
+    isPlaying = false;
+    playBtn.textContent = 'Play';
+    status.textContent = 'Paused';
+    mouth.classList.remove('open');
+    if(mouth._interval){ clearInterval(mouth._interval); mouth._interval = null; }
+    // auto advance
+    if(autoAdvance){
+      if(idx < order.length - 1){
+        idx++;
+        displayCurrent();
+        setTimeout(()=> speakCurrent(), 260);
+      } else if(loopMode){
+        idx = 0;
+        displayCurrent();
+        setTimeout(()=> speakCurrent(), 260);
+      }
+    }
+  };
+  // small mouth animation on word boundaries where supported
+  utter.onboundary = (e) => {
+    if(e.name === 'word'){
+      mouth.classList.add('open');
+      setTimeout(()=> mouth.classList.remove('open'), 100 + Math.random()*80);
+    }
+  };
+  window.speechSynthesis.speak(utter);
+}
+
+playBtn.addEventListener('click', ()=>{
+  if(isPlaying){
+    // pause
+    window.speechSynthesis.pause();
+    isPlaying = false;
+    playBtn.textContent = 'Play';
+    status.textContent = 'Paused';
+    if(mouth._interval){ clearInterval(mouth._interval); mouth._interval = null; }
+    mouth.classList.remove('open');
+  } else {
+    // resume or start
+    if(window.speechSynthesis.paused && utter){
+      window.speechSynthesis.resume();
+      isPlaying = true;
+      playBtn.textContent = 'Pause';
+      status.textContent = 'Speaking...';
+      mouth._interval = setInterval(()=> mouth.classList.toggle('open'), 140);
+    } else {
+      speakCurrent();
+    }
+  }
+});
+
+prevBtn.addEventListener('click', ()=>{
+  if(idx > 0) idx--;
+  else if(loopMode) idx = order.length -1;
+  displayCurrent();
+});
+
+nextBtn.addEventListener('click', ()=>{
+  if(idx < order.length - 1) idx++;
+  else if(loopMode) idx = 0;
+  displayCurrent();
+});
+
+stopBtn.addEventListener('click', ()=>{
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  playBtn.textContent = 'Play';
+  status.textContent = 'Stopped';
+  if(mouth._interval){ clearInterval(mouth._interval); mouth._interval = null; }
+  mouth.classList.remove('open');
+});
+
+rateInput.addEventListener('input', ()=>{
+  rateLabel.textContent = parseFloat(rateInput.value).toFixed(1) + 'x';
+});
+
+shuffleBtn.addEventListener('click', ()=>{
+  shuffled = !shuffled;
+  if(shuffled){
+    // Fisher-Yates shuffle
+    for(let i=order.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [order[i],order[j]]=[order[j],order[i]];
+    }
+    shuffleBtn.textContent = 'Shuffled';
+  } else {
+    order = teachings.map((_,i)=>i);
+    shuffleBtn.textContent = 'Shuffle';
+  }
+  idx = 0;
+  displayCurrent();
+});
+
+loopBtn.addEventListener('click', ()=>{
+  loopMode = !loopMode;
+  loopBtn.textContent = 'Loop: ' + (loopMode ? 'On' : 'Off');
+});
+
+autoAdvanceBtn.addEventListener('click', ()=>{
+  autoAdvance = !autoAdvance;
+  autoAdvanceBtn.textContent = 'Auto: ' + (autoAdvance ? 'On' : 'Off');
+});
+
+goBtn.addEventListener('click', ()=>{
+  const val = parseInt(indexInput.value,10);
+  if(!isNaN(val) && val>=1 && val<=teachings.length){
+    // go to the real index in order
+    const realIndex = order.indexOf(val-1);
+    if(realIndex !== -1) idx = realIndex;
+    else idx = 0;
+    displayCurrent();
+  }
+});
+
+downloadBtn.addEventListener('click', ()=>{
+  const blob = new Blob([teachings.join("\n\n")], {type:'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'sri_ramakrishna_teachings_500.txt';
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+});
+
+/* voice listing (async) */
+function populateVoices(){
+  const voices = speechSynthesis.getVoices();
+  const sel = document.getElementById('voiceSelect');
+  sel.innerHTML = '';
+  voices.forEach(v=>{
+    const opt = document.createElement('option');
+    opt.value = v.name;
+    opt.textContent = `${v.name}${v.lang ? ' — ' + v.lang : ''}`;
+    sel.appendChild(opt);
+  });
+}
+// some browsers load voices asynchronously
+populateVoices();
+if (typeof speechSynthesis !== 'undefined') {
+  speechSynthesis.onvoiceschanged = populateVoices;
+}
+
+/* initialize */
+displayCurrent();
+status.textContent = 'Ready';
+document.addEventListener('keydown', (e)=>{
+  if(e.code==='Space'){ e.preventDefault(); playBtn.click(); }
+  if(e.key==='ArrowRight'){ nextBtn.click(); }
+  if(e.key==='ArrowLeft'){ prevBtn.click(); }
+});
+</script>
+</body>
+</html>
